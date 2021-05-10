@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../actions/types";
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../constants/actions";
 
 const userReducer = (userStateObj, action) => {
   switch (action.type) {
