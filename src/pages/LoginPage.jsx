@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Form, useForm } from "../components/useForm";
 import { LOGIN_SUCCESS } from "../constants/actions";
 import { logInPath } from "../constants/endpoints";
@@ -7,34 +7,43 @@ import { UserContext } from "../context/UserProvider";
 
 const LogInPage = () => {
   const userContext = useContext(UserContext);
+  const [loginSuccess, setLoginSuccess] =useState("")
   const initialUserValues = {
     username: "",
     password: "",
   };
 
-  const logIn = async () => {
+  const logIn = async (usernameInput, passwordInput) => {
     try {
       const response = await axios.post(logInPath, {
-        username: process.env.USERNAME,
-        password: process.env.PASSWORD,
+        username: usernameInput,
+        password: passwordInput,
       });
       console.log(response.data);
-
+      setLoginSuccess("")
       userContext.dispatch({ type: LOGIN_SUCCESS, payload: response.data });
     } catch (err) {
       console.log(err.response.data);
+      setLoginSuccess(err.response.data.success)
     }
   };
 
-  const { formValues, setFormValues, handleInputChange, handleReset } = useForm(
+  const { formValues, handleInputChange } = useForm(
     initialUserValues
   );
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const username = e.target.username.value
+    const password = e.target.password.value
+    logIn(username, password);
+
+};
 
 
   return (
     <main className="container form-container">
-      <Form>
+      <Form handleSubmit={handleSubmit}>
         <img className="mb-4" src="" alt="" width="72" height="57" />
         <h3 className="mb-3">SIGN IN TO START CREATING POSTS</h3>
         <p>Please enter your username and password</p>
@@ -69,6 +78,7 @@ const LogInPage = () => {
             aria-describedby="passwordField"
           />
         </div>
+        {loginSuccess === false ? <p style={{color: "red"}}>Please Try Again</p> : null}
         {/* <div className="checkbox mb-3">
             <label>
               <input type="checkbox" value="remember-me" /> Remember me
