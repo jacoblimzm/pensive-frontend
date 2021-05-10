@@ -4,7 +4,7 @@ const userReducer = (userStateObj, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       const tempUserObj = {
-        data: action.payload,
+        ...action.payload,
         isAuthenticated: true,
       };
       localStorage.setItem("user", JSON.stringify(tempUserObj));
@@ -12,12 +12,11 @@ const userReducer = (userStateObj, action) => {
 
     case LOGOUT_SUCCESS:
       const tempUserObj1 = {
-        data: {},
         isAuthenticated: false,
       };
       localStorage.setItem("user", JSON.stringify(tempUserObj1));
       return tempUserObj1;
-      
+
     default:
       return userStateObj;
   }
