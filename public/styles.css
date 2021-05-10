@@ -9,13 +9,32 @@ a {
   text-decoration: none;
 }
 
+.nav-container {
+    margin-bottom: 2rem;
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+  }
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
 .divider {
   margin: 0;
 }
 
 .form-container {
-  padding: 2% 25% 4% 25%;
-  
+  padding: 2% 25% 4% 25%; 
 }
 
 .form-container div {
