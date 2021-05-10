@@ -44,7 +44,6 @@ const LogInPage = () => {
   return (
     <main className="container form-container">
       <Form handleSubmit={handleSubmit}>
-        <img className="mb-4" src="" alt="" width="72" height="57" />
         <h3 className="mb-3">SIGN IN TO START CREATING POSTS</h3>
         <p>Please enter your username and password</p>
         <div className="mb-3">
