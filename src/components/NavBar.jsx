@@ -18,7 +18,7 @@ const NavBar = () => {
     },[])
 
   return (
-    <div className="container">
+    <div className="container nav-container">
       <header className="blog-header py-3">
         <div className="row flex-nowrap justify-content-between align-items-center">
           <div className="col-4 pt-1">
@@ -42,7 +42,7 @@ const NavBar = () => {
       <div className="nav-scroller py-1 mb-2">
         <nav className="nav d-flex justify-content-between">
         {categories.map( category => {
-            return <Link key={category.id} className="p-2 link-secondary" path={`/category/${category.category_name}`}>{category.category_name}</Link>
+            return <Link key={category.id} className="p-2 link-secondary" to={`/category/${category.category_name}`}>{category.category_name}</Link>
         })}
         </nav>
       </div>
