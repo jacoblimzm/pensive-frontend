@@ -42,7 +42,7 @@ const NavBar = () => {
       <div className="nav-scroller py-1 mb-2">
         <nav className="nav d-flex justify-content-between">
         {categories.map( category => {
-            return <Link className="p-2 link-secondary" path={`/category/${category.category_name}`}>{category.category_name}</Link>
+            return <Link key={category.id} className="p-2 link-secondary" path={`/category/${category.category_name}`}>{category.category_name}</Link>
         })}
         </nav>
       </div>
