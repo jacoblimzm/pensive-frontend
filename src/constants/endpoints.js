@@ -1,7 +1,7 @@
 
 // for "accounts" route
 const logInPath = "accounts/user/login/"
-const logOutPath = "account/user/logout/"
+const logOutPath = "accounts/user/logout/"
 const registerPath = "accounts/user/register/"
 const apiTokenPath = "accounts/api/token/" 
 const apiRefreshTokenPath = "accounts/api/token/refresh/"
