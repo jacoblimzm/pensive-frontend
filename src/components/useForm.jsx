@@ -24,10 +24,16 @@ const useForm = (initialFormValues) => {
 };
 
 const Form = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit } = props; // accepts a handleSubmit prop from any Component which uses the reusable Form component
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>
       {props.children}
     </form>
   );
 };
+
+
+export {
+    useForm,
+    Form,
+}
