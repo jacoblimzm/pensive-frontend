@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { allPostsPath, featuredPostPath } from "../constants/endpoints";
 import BlogCard from "../components/BlogCard";
 import FeaturedCard from "../components/FeaturedCard";
+import Header from "../components/Header";
 
 const BlogMain = () => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -34,15 +35,19 @@ const BlogMain = () => {
     getAllPosts();
   }, []);
   return (
-    <main className="container">
-      <FeaturedCard {...featuredPost}/>
+    <>
+      <Header header="Featured" />
+      <main className="container">
+        <FeaturedCard {...featuredPost} />
 
-      <div class="row mb-2">
-        {blogPosts.map( (post) => {
-          return <BlogCard key={post.id} {...post} />
+        <Header header="Latest" />
+        <div class="row mb-2">
+          {blogPosts.map((post) => {
+            return <BlogCard key={post.id} {...post} />;
           })}
-      </div>
-    </main>
+        </div>
+      </main>
+    </>
   );
 };
 
