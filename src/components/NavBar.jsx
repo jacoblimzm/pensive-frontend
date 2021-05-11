@@ -8,7 +8,7 @@ const NavBar = () => {
     const [categories, setCategories] = useState([])
 
     const getAllCategories = async () => {
-        const response = await axios.get(allCategoriesPath);
+        const response = await axios.get(`/${allCategoriesPath}`);
         console.log(response.data)
         setCategories(response.data)
     }
