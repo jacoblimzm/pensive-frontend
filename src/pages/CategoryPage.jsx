@@ -11,10 +11,15 @@ const CategoryPage = () => {
   const [categoryPosts, setCategoryPosts] = useState([]);
 
   const getIndividualCategory = async () => {
-    const response = await axios.get(`${allCategoriesPath}${categoryName}`);
-    console.log(response.data);
+    try {
+        const response = await axios.get(`${allCategoriesPath}${categoryName}`);
+        console.log(response.data);
+        setCategoryPosts(response.data.blogentries);
 
-    setCategoryPosts(response.data.blogentries);
+    } catch(err) {
+        console.log(err.response)
+    }
+    
   };
 
   useEffect(() => {
