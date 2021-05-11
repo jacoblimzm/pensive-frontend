@@ -8,7 +8,7 @@ const FeaturedCard = ( {title, excerpt, slug} ) => {
         <h1 className="display-4 fst-italic">{title}</h1>
         <p className="lead my-3">{excerpt}</p>
         <p className="lead mb-0">
-          <Link className="text-white fw-bold" to={`blog/${slug}`}>
+          <Link className="text-white fw-bold" to={`/blog/${slug}`}>
             Continue reading....
           </Link>
         </p>
