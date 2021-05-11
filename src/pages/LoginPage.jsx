@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { Form, useForm } from "../components/useForm";
 import { LOGIN_SUCCESS } from "../constants/actions";
 import { logInPath } from "../constants/endpoints";
@@ -51,6 +52,7 @@ const LogInPage = () => {
             Username
           </label>
           <input
+          required
             name="username"
             value={formValues.username}
             onChange={handleInputChange}
@@ -59,15 +61,13 @@ const LogInPage = () => {
             id="login-username"
             aria-describedby="usernameField"
           />
-          {/* <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
-            </div> */}
         </div>
         <div className="mb-3">
           <label htmlFor="login-password" className="form-label">
             Password
           </label>
           <input
+          required
             name="password"
             value={formValues.password}
             onChange={handleInputChange}
@@ -78,15 +78,10 @@ const LogInPage = () => {
           />
         </div>
         {loginSuccess === false ? <p style={{color: "red"}}>Please Try Again</p> : null}
-        {/* <div className="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me" /> Remember me
-            </label>
-          </div> */}
         <button className="w-100 btn btn-lg btn-dark mb-2" type="submit">
           Sign in
         </button>
-        <a href="">New? Register</a>
+        <Link to="/register">New? Register</Link>
       </Form>
       <p className="mt-5 mb-2 text-muted">your thoughts, penned down.</p>
     </main>
