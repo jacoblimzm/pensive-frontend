@@ -18,7 +18,7 @@ const BlogCard = ( {title, category, month, day, excerpt, slug, image} ) => {
               <p class="card-text mb-auto">
                 {excerpt}
               </p>
-              <Link to={`blog/${slug}`}>
+              <Link to={`/blog/${slug}`}>
                 Continue...
               </Link>
             </div>
