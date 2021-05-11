@@ -12,14 +12,12 @@ const CategoryPage = () => {
 
   const getIndividualCategory = async () => {
     try {
-        const response = await axios.get(`${allCategoriesPath}${categoryName}`);
-        console.log(response.data);
-        setCategoryPosts(response.data.blogentries);
-
-    } catch(err) {
-        console.log(err.response)
+      const response = await axios.get(`${allCategoriesPath}${categoryName}`);
+      console.log(response.data);
+      setCategoryPosts(response.data.blogentries);
+    } catch (err) {
+      console.log(err.response);
     }
-    
   };
 
   useEffect(() => {
@@ -31,9 +29,13 @@ const CategoryPage = () => {
       <Header header={capitalise(categoryName)} />
       <main class="container">
         <div class="row mb-2">
-          {categoryPosts[0] ? categoryPosts.map((post) => {
-            return <BlogCard {...post} key={post.id} />;
-          }) : <h1 className="display-4 fst-italic">No Posts Yet...</h1>}
+          {categoryPosts[0] ? (
+            categoryPosts.map((post) => {
+              return <BlogCard {...post} key={post.id} />;
+            })
+          ) : (
+            <h1 className="display-4 fst-italic">No Posts Yet...</h1>
+          )}
         </div>
       </main>
     </>
