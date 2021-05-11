@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
+import { capitalise } from "../constants/functions";
 
 
-const capitalise = (str) => {
-    if (str) {
-        return str.charAt(0).toUpperCase() + str.slice(1)
-    } else {
-        return ""
-    }
-    
-}
 
 const BlogCard = ( {title, category, month, day, excerpt, slug, image} ) => {
     return ( 
