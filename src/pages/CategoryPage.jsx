@@ -11,7 +11,7 @@ const CategoryPage = () => {
   const [categoryPosts, setCategoryPosts] = useState([]);
 
   const getIndividualCategory = async () => {
-    const response = await axios.get(`/${allCategoriesPath}${categoryName}`);
+    const response = await axios.get(`${allCategoriesPath}${categoryName}`);
     console.log(response.data);
 
     setCategoryPosts(response.data.blogentries);
