@@ -2,14 +2,14 @@ import axios from "axios";
 import { useForm, Form } from "../components/useForm";
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { allCategoriesPath, newPostPath } from "../constants/endpoints";
+import { allCategoriesPath, allPostsPath, newPostPath } from "../constants/endpoints";
 import { capitalise } from "../constants/functions";
 import { days, months } from "../constants/data";
 import { UserContext } from "../context/UserProvider";
 
 const NewBlogPage = () => {
     const userContext = useContext(UserContext);
-    const { history } = useHistory();
+    const history = useHistory();
   const [postSuccess, setPostSuccess] = useState({});
   const [categories, setCategories] = useState([]);
   const initialValues = {
@@ -57,10 +57,10 @@ const NewBlogPage = () => {
         setPostSuccess(response.data)
         if (response.data.success) {
             setTimeout( () => {
-                history.push();
-            })
+                history.push(`${allPostsPath}${response.data.data.slug}`);
+            }, 500)
         }
-        
+
     } catch(err) {
         console.log(err)
         setPostSuccess(err.response.data)
@@ -69,15 +69,6 @@ const NewBlogPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // console.log("title", e.target.title.value);
-    // console.log("excerpt", e.target.excerpt.value);
-    // console.log("category", e.target.category.value);
-    // console.log("image", e.target.image.value);
-    // console.log("month", e.target.month.value);
-    // console.log("day", e.target.day.value);
-    // console.log("content", e.target.content.value);
-    // console.log("breaking", e.target.breaking.checked);
 
     const title = e.target.title.value;
     const excerpt = e.target.excerpt.value;
@@ -242,9 +233,9 @@ const NewBlogPage = () => {
           </div>
         </div>
         <div className="w-100"></div>
-        <div className="col-9 col-sm-9 col-md-6 mb-3">
+        <div style={{textAlign: "center"}}className="col-9 col-sm-9 col-md-6 mb-3">
           {postSuccess.success === false ? (
-            <p style={{ color: "red" }}>{postSuccess.message}</p>
+            <p style={postSuccess.success === false ? { color: "red" }:{ color: "green"} }>{postSuccess.message}</p>
           ) : null}
           <button className="w-100 btn btn-lg btn-dark mb-2" type="submit">
             Post
