@@ -38,7 +38,10 @@ const BlogDetail = () => {
         <div className="col-sm-12 col-md-8"><p className="blog-content">{blogPost.content}</p></div>
       </div>
       <hr />
-      <Link to="/">Back to Posts</Link>
+      <div className="row justify-content-center">
+      <div className="col"><Link to={`/edit/${slugName}`}>Edit Post</Link></div>
+      <div className="col"><Link to="/">Back to Posts</Link></div>
+      </div>
     </div>
   );
 };
