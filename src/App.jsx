@@ -10,6 +10,7 @@ import CategoryPage from "./pages/CategoryPage";
 import BlogDetail from "./pages/BlogDetail";
 import RegisterPage from "./pages/RegisterPage";
 import NewBlogPage from "./pages/NewBlogPage";
+import EditBlogPage from "./pages/EditBlogPage";
 require("dotenv").config();
 
 function App() {
@@ -38,6 +39,13 @@ function App() {
           </Route>
           <Route path="/category/:categoryName">
             <CategoryPage />
+          </Route>
+          <Route path="/edit/:slugName">
+            {userContext.state.isAuthenticated ? (
+              <EditBlogPage />
+            ) : (
+              <Redirect to="/" />
+            )}
           </Route>
           <Route path="/blog/:slugName">
             <BlogDetail />
