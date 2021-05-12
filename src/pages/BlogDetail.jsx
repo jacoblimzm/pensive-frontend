@@ -12,7 +12,7 @@ const BlogDetail = () => {
   const getBlogPost = async (slug) => {
     try {
       const response = await axios.get(`${allPostsPath}${slug}/`);
-      console.log(response.data);
+      
       setBlogPost(response.data);
     } catch (err) {
       console.log(err.response);

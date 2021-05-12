@@ -12,7 +12,7 @@ const BlogMain = () => {
   const getAllPosts = async () => {
     try {
       const response = await axios.get(allPostsPath);
-      console.log(response.data);
+      
       setBlogPosts(response.data);
     } catch (err) {
       console.log(err.response);
@@ -22,7 +22,7 @@ const BlogMain = () => {
   const getFeaturedPost = async () => {
     try {
       const response = await axios.get(featuredPostPath);
-      console.log(response.data);
+      
       setFeaturedPost(response.data[0]);
     } catch (err) {
       console.log(err.response);
@@ -40,7 +40,7 @@ const BlogMain = () => {
         <FeaturedCard {...featuredPost} />
 
         <Header header="Latest" />
-        <div class="row mb-2">
+        <div className="row mb-2">
           {blogPosts.map((post) => {
             return <BlogCard key={post.id} {...post} />;
           })}

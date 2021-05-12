@@ -13,7 +13,7 @@ const CategoryPage = () => {
   const getIndividualCategory = async () => {
     try {
       const response = await axios.get(`${allCategoriesPath}${categoryName}`);
-      console.log(response.data);
+      
       setCategoryPosts(response.data.blogentries);
     } catch (err) {
       console.log(err.response);
