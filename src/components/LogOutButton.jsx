@@ -28,10 +28,11 @@ const LogOutButton = () => {
     
       const handleLogOut = () => {
         const user = JSON.parse(localStorage.getItem("user"));
-        console.log(user.token);
-        logOut(user.token);
+          if (user) {
+            console.log(user.token);
+            logOut(user.token);
+          }
       };
-
 
     return ( 
         <button type="button" class="btn btn-sm btn-outline-danger" onClick={handleLogOut}>Log Out</button>
