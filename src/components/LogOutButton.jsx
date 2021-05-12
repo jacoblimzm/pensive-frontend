@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useContext } from "react";
+import { useHistory } from "react-router";
 import { LOGOUT_SUCCESS } from "../constants/actions";
 import { logOutPath } from "../constants/endpoints";
 import { UserContext } from "../context/UserProvider";
 
 const LogOutButton = () => {
-
     const userContext = useContext(UserContext);
+    const history = useHistory();
     const logOut = async (token) => {
         try {
           const response = await axios.post(
@@ -20,6 +21,7 @@ const LogOutButton = () => {
           );
           console.log(response.data);
           userContext.dispatch({ type: LOGOUT_SUCCESS });
+          history.push("/");
         } catch (err) {
           console.log(err.response.data);
         }
