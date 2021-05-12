@@ -1,9 +1,12 @@
+import axios from "axios"
 import { useForm, Form } from "../components/useForm";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { allCategoriesPath } from "../constants/endpoints";
 
 const NewBlogPage = () => {
   const [postSuccess, setPostSuccess] = useState({});
+  const [categories, setCategories] = useState([]);
   const initialValues = {
     title: "",
     excerpt: "",
@@ -15,12 +18,27 @@ const NewBlogPage = () => {
     breaking: false, // boolean. drop down?
   };
 
+  const getAllCategory = async () => {
+    try {
+      const response = await axios.get(`${allCategoriesPath}`);
+      console.log(response.data);
+      setCategories(response.data);
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
+
+  useEffect( () => {
+    getAllCategory();
+
+  },[])
+
   const { formValues, handleInputChange } = useForm(initialValues);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(e.target.data);
+    console.log(e.target.category.value);
   };
   return (
     <main className="container form-container">
@@ -35,7 +53,7 @@ const NewBlogPage = () => {
             Title (50 Char Max)
           </label>
           <input
-            required
+            // required
             name="title"
             value={formValues.email}
             onChange={handleInputChange}
@@ -47,13 +65,13 @@ const NewBlogPage = () => {
           />
         </div>
         {/* small hack to break to a new line */}
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="new-excerpt" className="form-label">
             Excerpt (150 Char Max)
           </label>
           <input
-            required
+            // required
             name="excerpt"
             value={formValues.username}
             onChange={handleInputChange}
@@ -65,11 +83,20 @@ const NewBlogPage = () => {
           />
         </div>
         {/* small hack to break to a new line */}
-        <div class="w-100"></div>
+        <div className="w-100"></div>
+        <div className="col-9 col-sm-9 col-md-6 mb-3">
+          <label htmlFor="new-category" className="form-label">Categories</label>
+          <select className="form-select" id="new-category" name="category">
+              {categories && categories.map( category => {
+                  return <option key={category.id}>{category.category_name}</option>
+              })}
+          </select>
+        </div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="" className="form-label"></label>
           <input
-            required
+            // required
             name=""
             value=""
             onChange={handleInputChange}
@@ -79,11 +106,11 @@ const NewBlogPage = () => {
             aria-describedby=""
           />
         </div>
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="" className="form-label"></label>
           <input
-            required
+            // required
             name=""
             value=""
             onChange={handleInputChange}
@@ -93,25 +120,11 @@ const NewBlogPage = () => {
             aria-describedby=""
           />
         </div>
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="" className="form-label"></label>
           <input
-            required
-            name=""
-            value=""
-            onChange={handleInputChange}
-            type=""
-            className="form-control"
-            id=""
-            aria-describedby=""
-          />
-        </div>
-        <div class="w-100"></div>
-        <div className="col-9 col-sm-9 col-md-6 mb-3">
-          <label htmlFor="" className="form-label"></label>
-          <input
-            required
+            // required
             name=""
             value=""
             onChange={handleInputChange}
@@ -123,13 +136,13 @@ const NewBlogPage = () => {
         </div>
 
         {/* small hack to break to a new line */}
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="register-password" className="form-label">
             Password
           </label>
           <input
-            required
+            // required
             name="password"
             value={formValues.password}
             onChange={handleInputChange}
@@ -140,7 +153,7 @@ const NewBlogPage = () => {
           />
         </div>
         {/* small hack to break to a new line */}
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <div className="form-check mb-3">
             <input
@@ -155,13 +168,13 @@ const NewBlogPage = () => {
             </label>
           </div>
         </div>
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           {postSuccess.success === false ? (
             <p style={{ color: "red" }}>{postSuccess.message}</p>
           ) : null}
           <button className="w-100 btn btn-lg btn-dark mb-2" type="submit">
-            Create
+            Post
           </button>
         </div>
         <Link to="/">Back to home</Link>
