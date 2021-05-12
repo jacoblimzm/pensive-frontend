@@ -27,8 +27,8 @@ const CategoryPage = () => {
   return (
     <>
       <Header header={capitalise(categoryName)} />
-      <main class="container">
-        <div class="row mb-2">
+      <main className="container">
+        <div className="row mb-2">
           {categoryPosts[0] ? (
             categoryPosts.map((post) => {
               return <BlogCard {...post} key={post.id} />;

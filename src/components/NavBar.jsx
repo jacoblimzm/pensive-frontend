@@ -15,7 +15,7 @@ const NavBar = () => {
       
       setCategories(response.data);
     } catch (err) {
-      console.log(err.response);
+      console.log(err.response.data);
     }
   };
 
@@ -63,7 +63,7 @@ const NavBar = () => {
       <hr className="divider" />
       <div className="nav-scroller py-1 mb-2">
         <nav className="nav d-flex justify-content-between">
-          {categories.map((category) => {
+          {categories[0] && categories.map((category) => {
             return (
               <Link
                 key={category.id}
