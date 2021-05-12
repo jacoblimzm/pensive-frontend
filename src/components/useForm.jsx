@@ -4,10 +4,12 @@ const useForm = (initialFormValues) => {
   const [formValues, setFormValues] = useState(initialFormValues);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, checked } = e.target;
+
     setFormValues({
       ...formValues,
       [name]: value,
+      [name]: checked,
     });
   };
 
