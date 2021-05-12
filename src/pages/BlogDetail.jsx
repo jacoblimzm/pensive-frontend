@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { allPostsPath } from "../constants/endpoints";
 import { capitalise } from "../constants/functions";
+import { UserContext } from "../context/UserProvider";
 
 const BlogDetail = () => {
+  const userContext = useContext(UserContext);
   const { slugName } = useParams();
 
   const [blogPost, setBlogPost] = useState({});
@@ -39,7 +41,7 @@ const BlogDetail = () => {
       </div>
       <hr />
       <div className="row justify-content-center">
-      <div className="col"><Link to={`/edit/${slugName}`}>Edit Post</Link></div>
+      {userContext.state.isAuthenticated && <div className="col"><Link to={`/edit/${slugName}`}>Edit Post</Link></div>}
       <div className="col"><Link to="/">Back to Posts</Link></div>
       </div>
     </div>
