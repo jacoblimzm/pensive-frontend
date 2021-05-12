@@ -1,10 +1,15 @@
-import axios from "axios"
+import axios from "axios";
 import { useForm, Form } from "../components/useForm";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { allCategoriesPath } from "../constants/endpoints";
+import { Link, useHistory } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { allCategoriesPath, newPostPath } from "../constants/endpoints";
+import { capitalise } from "../constants/functions";
+import { days, months } from "../constants/data";
+import { UserContext } from "../context/UserProvider";
 
 const NewBlogPage = () => {
+    const userContext = useContext(UserContext);
+    const { history } = useHistory();
   const [postSuccess, setPostSuccess] = useState({});
   const [categories, setCategories] = useState([]);
   const initialValues = {
@@ -27,19 +32,69 @@ const NewBlogPage = () => {
       console.log(err.response);
     }
   };
-
-  useEffect( () => {
-    getAllCategory();
-
-  },[])
-
   const { formValues, handleInputChange } = useForm(initialValues);
+
+  const createNewPost = async (title, excerpt, category, image, month, day, content, breaking=false) => {
+
+    try {
+        const response = await axios.post(newPostPath, {
+            title: title,
+            excerpt: excerpt,
+            category: category,
+            image: image,
+            month: month,
+            day: day,
+            content: content,
+            breaking: breaking
+        }, {
+            headers: {
+              Authorization: "Bearer " + userContext.state.token,
+            },
+          }
+        )
+
+        console.log(response.data)
+        setPostSuccess(response.data)
+        if (response.data.success) {
+            setTimeout( () => {
+                history.push();
+            })
+        }
+        
+    } catch(err) {
+        console.log(err)
+        setPostSuccess(err.response.data)
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(e.target.category.value);
+    // console.log("title", e.target.title.value);
+    // console.log("excerpt", e.target.excerpt.value);
+    // console.log("category", e.target.category.value);
+    // console.log("image", e.target.image.value);
+    // console.log("month", e.target.month.value);
+    // console.log("day", e.target.day.value);
+    // console.log("content", e.target.content.value);
+    // console.log("breaking", e.target.breaking.checked);
+
+    const title = e.target.title.value;
+    const excerpt = e.target.excerpt.value;
+    const category = e.target.category.value;
+    const image =  e.target.image.value;
+    const month = e.target.month.value;
+    const day = e.target.day.value;
+    const content = e.target.content.value;
+    const breaking = e.target.breaking.checked;
+
+    createNewPost(title, excerpt, category, image, month, day, content, breaking)
   };
+
+  useEffect(() => {
+    getAllCategory();
+  }, []);
+
   return (
     <main className="container form-container">
       <Form handleSubmit={handleSubmit}>
@@ -85,71 +140,89 @@ const NewBlogPage = () => {
         {/* small hack to break to a new line */}
         <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
-          <label htmlFor="new-category" className="form-label">Categories</label>
-          <select className="form-select" id="new-category" name="category">
-              {categories && categories.map( category => {
-                  return <option key={category.id}>{category.category_name}</option>
+          <label htmlFor="new-category" className="form-label">
+            Category
+          </label>
+          <select
+            className="form-select"
+            id="new-category"
+            name="category"
+            value={formValues.category}
+            onChange={handleInputChange}
+          >
+            {categories &&
+              categories.map((category) => {
+                return (
+                  <option key={category.id} value={category.category_name}>{capitalise(category.category_name)}</option>
+                );
               })}
           </select>
         </div>
         <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
-          <label htmlFor="" className="form-label"></label>
-          <input
-            // required
-            name=""
-            value=""
-            onChange={handleInputChange}
-            type=""
-            className="form-control"
-            id=""
-            aria-describedby=""
-          />
-        </div>
-        <div className="w-100"></div>
-        <div className="col-9 col-sm-9 col-md-6 mb-3">
-          <label htmlFor="" className="form-label"></label>
-          <input
-            // required
-            name=""
-            value=""
-            onChange={handleInputChange}
-            type=""
-            className="form-control"
-            id=""
-            aria-describedby=""
-          />
-        </div>
-        <div className="w-100"></div>
-        <div className="col-9 col-sm-9 col-md-6 mb-3">
-          <label htmlFor="" className="form-label"></label>
-          <input
-            // required
-            name=""
-            value=""
-            onChange={handleInputChange}
-            type=""
-            className="form-control"
-            id=""
-            aria-describedby=""
-          />
-        </div>
-
-        {/* small hack to break to a new line */}
-        <div className="w-100"></div>
-        <div className="col-9 col-sm-9 col-md-6 mb-3">
-          <label htmlFor="register-password" className="form-label">
-            Password
+          <label htmlFor="new-image" className="form-label">
+            Image URL
           </label>
           <input
             // required
-            name="password"
-            value={formValues.password}
+            name="image"
+            value={formValues.image}
             onChange={handleInputChange}
-            type="password"
+            type="text"
             className="form-control"
-            id="register-password"
-            aria-describedby="passwordField"
+            id="new-image"
+            aria-describedby="imageField"
+          />
+        </div>
+        <div className="w-100"></div>
+
+        {/* small hack to break to a new line */}
+        <div className="w-100"></div>
+        <div className="col-sm-9 col-md-3 mb-3">
+          <label htmlFor="new-month" className="form-label">
+            Month
+          </label>
+          <select
+            className="form-select"
+            id="new-month"
+            name="month"
+            value={formValues.month}
+            onChange={handleInputChange}
+          >
+            {months.map( (month, index) => {
+                return <option key={index} value={month}>{month}</option>
+            })}
+          </select>
+        </div>
+        <div className="col-sm-9 col-md-3 mb-3">
+          <label htmlFor="new-day" className="form-label">
+            Day
+          </label>
+          <select
+            className="form-select"
+            id="new-day"
+            name="day"
+            value={formValues.day}
+            onChange={handleInputChange}
+          >
+            {days.map( (day, index) => {
+                return <option key={index} value={day}>{day}</option>
+            })}
+          </select>
+        </div>
+        <div className="w-100"></div>
+        <div className="col-9 col-sm-9 col-md-6 mb-3">
+          <label htmlFor="new-content" className="form-label">Content</label>
+          <textarea
+            // required
+            rows="5"
+            name="content"
+            value={formValues.content}
+            onChange={handleInputChange}
+            type="text"
+            className="form-control"
+            id="new-content"
+            aria-describedby="contentField"
           />
         </div>
         {/* small hack to break to a new line */}
@@ -157,14 +230,14 @@ const NewBlogPage = () => {
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <div className="form-check mb-3">
             <input
-              name="staffstatus"
+              name="breaking"
               className="form-check-input"
               type="checkbox"
-              value="staff-status"
-              id="staffCheckDefault"
+              value="breaking-boolean"
+              id="new-breaking"
             />
-            <label className="form-check-label" htmlFor="staffCheckDefault">
-              Staff
+            <label className="form-check-label" htmlFor="new-breaking">
+              Featured Post
             </label>
           </div>
         </div>
