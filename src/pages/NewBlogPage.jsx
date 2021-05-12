@@ -101,7 +101,7 @@ const NewBlogPage = () => {
           <input
             // required
             name="title"
-            value={formValues.email}
+            value={formValues.title}
             onChange={handleInputChange}
             type="text"
             className="form-control"
@@ -119,7 +119,7 @@ const NewBlogPage = () => {
           <input
             // required
             name="excerpt"
-            value={formValues.username}
+            value={formValues.excerpt}
             onChange={handleInputChange}
             type="text"
             className="form-control"
