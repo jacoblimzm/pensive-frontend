@@ -46,3 +46,7 @@ const days = [
   "30",
   "31",
 ];
+
+export {
+    months, days
+}
