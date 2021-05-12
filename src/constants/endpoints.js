@@ -10,6 +10,7 @@ const apiRefreshTokenPath = "/accounts/api/token/refresh/"
 const allPostsPath = "/api-blog/"
 const allCategoriesPath = "/api-blog/categories/"
 const newPostPath = "/api-blog/new/"
+const editPostPath = "/api-blog/edit/"
 const featuredPostPath = "/api-blog/breaking/"
 
 // path("categories/<category_name>", views.CategoryDetailView.as_view()),
@@ -25,5 +26,6 @@ export {
     allPostsPath,
     allCategoriesPath,
     newPostPath,
+    editPostPath,
     featuredPostPath,
 }
