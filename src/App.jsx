@@ -1,7 +1,4 @@
-import axios from "axios";
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "./constants/actions";
-import { allPostsPath, logInPath, logOutPath } from "./constants/endpoints";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { UserContext } from "./context/UserProvider";
