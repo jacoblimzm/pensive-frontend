@@ -27,7 +27,7 @@ const LogInPage = () => {
         history.push("/");
       }
     } catch (err) {
-      console.log(err.response.data);
+      
       setLoginSuccess(err.response.data.success);
     }
   };
@@ -78,7 +78,7 @@ const LogInPage = () => {
             aria-describedby="passwordField"
           />
         </div>
-        <div class="w-100"></div> 
+        
         <div style={{textAlign: "center"}} className="col-9 col-sm-9 col-md-6 mb-3">
           {loginSuccess === false ? (
             <p style={{ color: "red" }}>Please Try Again</p>
