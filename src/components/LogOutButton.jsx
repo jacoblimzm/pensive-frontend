@@ -11,9 +11,8 @@ const LogOutButton = () => {
         try {
           const response = await axios.post(
             logOutPath,
-            {}, 
+            {}, // since a post request is made, some "data" is expected as a second argument. if argument is not provided, it will return an error. 
             {
-              // since a post request is made, some "data" is expected as a second argument. if blank, it will return an error.
               headers: {
                 Authorization: "Bearer " + token,
               },
@@ -28,7 +27,7 @@ const LogOutButton = () => {
     
       const handleLogOut = () => {
         const user = JSON.parse(localStorage.getItem("user"));
-          if (user) {
+          if (user) { // to prevent the absence of "user" object in local storage from crashing the app.
             console.log(user.token);
             logOut(user.token);
           }
