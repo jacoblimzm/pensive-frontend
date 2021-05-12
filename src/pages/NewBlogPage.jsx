@@ -52,12 +52,12 @@ const NewBlogPage = () => {
             },
           }
         )
-
         console.log(response.data)
         setPostSuccess(response.data)
         if (response.data.success) {
             setTimeout( () => {
-                history.push(`${allPostsPath}${response.data.data.slug}`);
+                // history.push(`${allPostsPath}${response.data.data.slug}`);
+                history.push("/")
             }, 500)
         }
 

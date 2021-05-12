@@ -5,7 +5,7 @@ import { Form, useForm } from "../components/useForm";
 import { registerPath } from "../constants/endpoints";
 
 const RegisterPage = () => {
-    const history = useHistory();
+  const history = useHistory();
   const [registerSuccess, setRegisterSuccess] = useState({});
   const initialUserValues = {
     username: "",
