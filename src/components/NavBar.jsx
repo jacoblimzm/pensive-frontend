@@ -1,29 +1,30 @@
-import axios from "axios"
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { allCategoriesPath } from "../constants/endpoints";
+import { UserContext } from "../context/UserProvider";
+import LogOutButton from "./LogOutButton";
 
 const NavBar = () => {
+  const userContext = useContext(UserContext);
+  const [categories, setCategories] = useState([]);
 
-    const [categories, setCategories] = useState([])
-
-    const getAllCategories = async () => {
-      try {
-        const response = await axios.get(`${allCategoriesPath}`);
-        console.log(response.data)
-        setCategories(response.data)
-
-      } catch(err) {
-        console.log(err.response)
-      }
+  const getAllCategories = async () => {
+    try {
+      const response = await axios.get(`${allCategoriesPath}`);
+      console.log(response.data);
+      setCategories(response.data);
+    } catch (err) {
+      console.log(err.response);
     }
+  };
 
-    useEffect( () => {
-        getAllCategories();
-    },[])
+  useEffect(() => {
+    getAllCategories();
+  }, []);
 
   return (
-    <div className="container nav-container">
+    <div className="container nav-container sticky-top">
       <header className="blog-header py-3">
         <div className="row flex-nowrap justify-content-between align-items-center">
           <div className="col-4 pt-1">
@@ -37,18 +38,42 @@ const NavBar = () => {
             </Link>
           </div>
           <div className="col-4 d-flex justify-content-end align-items-center">
-            <Link className="btn btn-sm btn-outline-secondary" to="/login">
-              Log In
-            </Link>
+            {userContext.state.isAuthenticated && (
+              <Link className="btn btn-sm btn-outline-primary mx-2" to="/new">
+                New Post
+              </Link>
+            )}
+            {userContext.state.isAuthenticated ? null : (
+              <>
+                <Link
+                  className="btn btn-sm btn-outline-secondary mx-2"
+                  to="/register"
+                >
+                  Register
+                </Link>
+                <Link className="btn btn-sm btn-outline-success" to="/login">
+                  Login
+                </Link>{" "}
+              </>
+            )}
+            {userContext.state.isAuthenticated && <LogOutButton />}
           </div>
         </div>
       </header>
       <hr className="divider" />
       <div className="nav-scroller py-1 mb-2">
         <nav className="nav d-flex justify-content-between">
-        {categories.map( category => {
-            return <Link key={category.id} className="p-2 link-secondary" to={`/category/${category.category_name}`}>{category.category_name}</Link>
-        })}
+          {categories.map((category) => {
+            return (
+              <Link
+                key={category.id}
+                className="p-2 link-secondary"
+                to={`/category/${category.category_name}`}
+              >
+                {category.category_name}
+              </Link>
+            );
+          })}
         </nav>
       </div>
       <hr className="divider" />
