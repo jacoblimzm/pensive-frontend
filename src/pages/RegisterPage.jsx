@@ -16,25 +16,25 @@ const RegisterPage = () => {
   const { formValues, handleInputChange } = useForm(initialUserValues);
 
   const register = async (username, password, email, is_staff) => {
-      try {
-          const response = await axios.post(registerPath, {
-              username: username,
-              password: password,
-              email: email,
-              is_staff: is_staff,
-          })
-          console.log(response.data)
-          setRegisterSuccess(response.data)
-          if (response.data.success) {
-              setTimeout( () => {
-                history.push("/login")
-              }, 2000)
-          }
-      } catch(err) {
-          console.log(err.response.data)
-        //   setRegisterSuccess(err.response.data.success);
+    try {
+      const response = await axios.post(registerPath, {
+        username: username,
+        password: password,
+        email: email,
+        is_staff: is_staff,
+      });
+      console.log(response.data);
+      setRegisterSuccess(response.data);
+      if (response.data.success) {
+        setTimeout(() => {
+          history.push("/login");
+        }, 1000);
       }
-  }
+    } catch (err) {
+      console.log(err.response.data);
+      //   setRegisterSuccess(err.response.data.success);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,8 +42,7 @@ const RegisterPage = () => {
     const password = e.target.password.value;
     const email = e.target.email.value;
     const is_staff = e.target.staffstatus.checked;
-    register(username, password, email, is_staff)
-
+    register(username, password, email, is_staff);
   };
 
   return (
@@ -67,7 +66,7 @@ const RegisterPage = () => {
           />
         </div>
         {/* small hack to break to a new line */}
-        <div class="w-100"></div> 
+        <div class="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="register-username" className="form-label">
             Username
@@ -84,7 +83,7 @@ const RegisterPage = () => {
           />
         </div>
         {/* small hack to break to a new line */}
-        <div class="w-100"></div> 
+        <div class="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="register-password" className="form-label">
             Password
@@ -103,27 +102,30 @@ const RegisterPage = () => {
         {/* small hack to break to a new line */}
         <div class="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
-        <div className="form-check mb-3">
-          <input
-            name="staffstatus"
-            className="form-check-input"
-            type="checkbox"
-            value="staff-status"
-            id="staffCheckDefault"
-          />
-          <label className="form-check-label" htmlFor="staffCheckDefault">
-            Staff
-          </label>
-        </div>
+          <div className="form-check mb-3">
+            <input
+              name="staffstatus"
+              className="form-check-input"
+              type="checkbox"
+              value="staff-status"
+              id="staffCheckDefault"
+            />
+            <label className="form-check-label" htmlFor="staffCheckDefault">
+              Staff
+            </label>
+          </div>
         </div>
         <div class="w-100"></div>
-        <div className="col-9 col-sm-9 col-md-6 mb-3">
-        {registerSuccess.success === false ? (
-          <p style={{ color: "red" }}>{registerSuccess.message}</p>
-        ) : null}
-        <button className="w-100 btn btn-lg btn-dark mb-2" type="submit">
-          Register
-        </button>
+        <div
+          style={{ textAlign: "center" }}
+          className="col-9 col-sm-9 col-md-6 mb-3"
+        >
+          {registerSuccess.success === false ? (
+            <p style={{ color: "red" }}>{registerSuccess.message}</p>
+          ) : null}
+          <button className="w-100 btn btn-lg btn-dark mb-2" type="submit">
+            Register
+          </button>
         </div>
         <Link to="/login">Have an account? Log In.</Link>
       </Form>

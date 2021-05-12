@@ -53,3 +53,8 @@ a {
     font-size: 2.25rem;
     font-style: italic;
 }
+
+#new-post-img {
+  display: block;
+  max-height: 250px;
+}

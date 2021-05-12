@@ -21,10 +21,11 @@ const LogInPage = () => {
         username: usernameInput,
         password: passwordInput,
       });
-      console.log(response.data);
       setLoginSuccess("");
-      userContext.dispatch({ type: LOGIN_SUCCESS, payload: response.data });
-      history.push("/");
+      if (response.data.success) {
+        userContext.dispatch({ type: LOGIN_SUCCESS, payload: response.data });
+        history.push("/");
+      }
     } catch (err) {
       console.log(err.response.data);
       setLoginSuccess(err.response.data.success);
@@ -78,7 +79,7 @@ const LogInPage = () => {
           />
         </div>
         <div class="w-100"></div> 
-        <div className="col-9 col-sm-9 col-md-6 mb-3">
+        <div style={{textAlign: "center"}} className="col-9 col-sm-9 col-md-6 mb-3">
           {loginSuccess === false ? (
             <p style={{ color: "red" }}>Please Try Again</p>
           ) : null}

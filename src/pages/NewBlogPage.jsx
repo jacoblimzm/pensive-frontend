@@ -2,7 +2,7 @@ import axios from "axios";
 import { useForm, Form } from "../components/useForm";
 import { Link, useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { allCategoriesPath, allPostsPath, newPostPath } from "../constants/endpoints";
+import { allCategoriesPath, newPostPath } from "../constants/endpoints";
 import { capitalise } from "../constants/functions";
 import { days, months } from "../constants/data";
 import { UserContext } from "../context/UserProvider";
@@ -89,8 +89,8 @@ const NewBlogPage = () => {
   return (
     <main className="container form-container">
       <Form handleSubmit={handleSubmit}>
-        <div className="col-9 col-sm-9 col-md-6 mb-3">
-          <img className="img-fluid" src="" />
+        <div className="col mb-3">
+          <img id="new-post-img" className="img-fluid rounded mx-auto" src="/images/quill.jpeg" alt="quill-img"/>
         </div>
         <h3 className="mb-3">CREATE SOMETHING NEW</h3>
         <p>Please do not leave any fields blank.</p>
@@ -233,7 +233,7 @@ const NewBlogPage = () => {
           </div>
         </div>
         <div className="w-100"></div>
-        <div style={{textAlign: "center"}}className="col-9 col-sm-9 col-md-6 mb-3">
+        <div style={{textAlign: "center"}} className="col-9 col-sm-9 col-md-6 mb-3">
           {postSuccess.success === false ? (
             <p style={postSuccess.success === false ? { color: "red" }:{ color: "green"} }>{postSuccess.message}</p>
           ) : null}
