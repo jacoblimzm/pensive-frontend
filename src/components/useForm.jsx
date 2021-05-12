@@ -9,7 +9,7 @@ const useForm = (initialFormValues) => {
     setFormValues({
       ...formValues,
       [name]: value,
-      [name]: checked,
+      breaking: checked,
     });
   };
 
