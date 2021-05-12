@@ -2,7 +2,7 @@ import axios from "axios";
 import { useForm, Form } from "../components/useForm";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { allCategoriesPath, allPostsPath, newPostPath } from "../constants/endpoints";
+import { allCategoriesPath, allPostsPath, editPostPath } from "../constants/endpoints";
 import { capitalise } from "../constants/functions";
 import { days, months } from "../constants/data";
 import { UserContext } from "../context/UserProvider";
@@ -28,8 +28,11 @@ const EditBlogPage = () => {
   const getBlogPost = async (slug) => {
     try {
       const response = await axios.get(`${allPostsPath}${slug}/`);
-      console.log(response.data);
-      setFormValues(response.data); // with the setFormValues from useForm, pre fill the input fields with existing blog information
+      console.log(response.data);      
+      setFormValues({ // with the setFormValues from useForm, pre fill the input fields with existing blog information
+          ...response.data,
+          category: response.data.category.category_name // 'category' property returned from backend is an object with id and category name. we want the category name.
+        }); 
     } catch (err) {
       console.log(err.response);
     }
@@ -45,10 +48,11 @@ const EditBlogPage = () => {
   };
   const { formValues, setFormValues, handleInputChange } = useForm(initialValues);
 
-  const createNewPost = async (title, excerpt, category, image, month, day, content, breaking=false) => {
+  const updatePost = async (id, title, excerpt, category, image, month, day, content, breaking=false) => {
 
     try {
-        const response = await axios.post(newPostPath, {
+        const response = await axios.put(`${editPostPath}${slugName}`, {
+            id: id,
             title: title,
             excerpt: excerpt,
             category: category,
@@ -63,18 +67,19 @@ const EditBlogPage = () => {
             },
           }
         )
-        console.log(response.data)
+        
         setPostSuccess(response.data)
         if (response.data.success) {
             setTimeout( () => {
                 // history.push(`${allPostsPath}${response.data.data.slug}`);
-                history.push(`/api-blog/${response.data.data.slug}`)
+                history.push(`/`)
             }, 500)
         }
 
     } catch(err) {
-        console.log(err)
-        setPostSuccess(err.response.data)
+        setPostSuccess({
+            success: false,
+            message: "Please try Again"})
     }
   }
 
@@ -90,7 +95,8 @@ const EditBlogPage = () => {
     const content = e.target.content.value;
     const breaking = e.target.breaking.checked;
 
-    createNewPost(title, excerpt, category, image, month, day, content, breaking)
+    // pass in formValues.id as that is required by the PUT request to the backend to find the correct post and update it.
+    updatePost(formValues.id, title, excerpt, category, image, month, day, content, breaking)
   };
 
   useEffect(() => {
