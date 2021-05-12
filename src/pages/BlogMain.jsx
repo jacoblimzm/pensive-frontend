@@ -41,7 +41,7 @@ const BlogMain = () => {
 
         <Header header="Latest" />
         <div className="row mb-2">
-          {blogPosts.map((post) => {
+          {blogPosts[0] && blogPosts.map((post) => {
             return <BlogCard key={post.id} {...post} />;
           })}
         </div>
