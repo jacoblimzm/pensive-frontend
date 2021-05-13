@@ -19,7 +19,7 @@ const LogOutButton = () => {
               },
             }
           );
-          console.log(response.data);
+          
           userContext.dispatch({ type: LOGOUT_SUCCESS });
           history.push("/");
         } catch (err) {
