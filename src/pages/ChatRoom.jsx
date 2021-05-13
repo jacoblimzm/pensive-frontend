@@ -23,7 +23,7 @@ const ChatRoom = () => {
 
     clientState.send(
       JSON.stringify({
-        name: "Jacob",
+        name: userContext.state.data.username,
         message: formValues.message,
       })
     );
