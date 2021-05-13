@@ -8,15 +8,15 @@ import LogOutButton from "./LogOutButton";
 const NavBar = () => {
   const userContext = useContext(UserContext);
   const [categories, setCategories] = useState([]);
-  
+
   const getAllCategories = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}${allCategoriesPath}`);
-      
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}${allCategoriesPath}`
+      );
+
       setCategories(response.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -38,6 +38,9 @@ const NavBar = () => {
             </Link>
           </div>
           <div className="col-4 d-flex justify-content-end align-items-center">
+            <Link className="btn btn-sm btn-outline-warning" to="/chat/room1">
+              Chat
+            </Link>
             {userContext.state.isAuthenticated && (
               <Link className="btn btn-sm btn-outline-primary mx-2" to="/new">
                 New Post
@@ -63,17 +66,18 @@ const NavBar = () => {
       <hr className="divider" />
       <div className="nav-scroller py-1 mb-2">
         <nav className="nav d-flex justify-content-between">
-          {categories && categories.map((category) => {
-            return (
-              <Link
-                key={category.id}
-                className="p-2 link-secondary"
-                to={`/category/${category.category_name}`}
-              >
-                {category.category_name}
-              </Link>
-            );
-          })}
+          {categories &&
+            categories.map((category) => {
+              return (
+                <Link
+                  key={category.id}
+                  className="p-2 link-secondary"
+                  to={`/category/${category.category_name}`}
+                >
+                  {category.category_name}
+                </Link>
+              );
+            })}
         </nav>
       </div>
       <hr className="divider" />
