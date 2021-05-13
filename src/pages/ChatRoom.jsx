@@ -32,7 +32,7 @@ const ChatRoom = () => {
   };
 
   useEffect(() => {
-    const client = new W3CWebSocket(`ws://localhost:8000/ws/chat/${roomName}/`);
+    const client = new W3CWebSocket(`wss://${process.env.REACT_APP_BACKEND}/ws/chat/${roomName}/`);
     setClientState(client);
 
     client.onerror = () => {
