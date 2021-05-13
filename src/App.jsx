@@ -9,6 +9,7 @@ import BlogDetail from "./pages/BlogDetail";
 import RegisterPage from "./pages/RegisterPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import EditBlogPage from "./pages/EditBlogPage";
+import ChatRoom from "./pages/ChatRoom";
 require("dotenv").config();
 
 function App() {
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/blog/:slugName">
             <BlogDetail />
+          </Route>
+          <Route path="/chat/:roomName">
+            <ChatRoom />
           </Route>
         </Switch>
       </div>
