@@ -29,28 +29,33 @@ function App() {
           <Route path="/register">
             <RegisterPage />
           </Route>
-          <Route path="/new">
-            {userContext.state.isAuthenticated ? (
-              <NewBlogPage />
-            ) : (
-              <Redirect to="/" />
-            )}
-          </Route>
           <Route path="/category/:categoryName">
             <CategoryPage />
-          </Route>
-          <Route path="/edit/:slugName">
-            {userContext.state.isAuthenticated ? (
-              <EditBlogPage />
-            ) : (
-              <Redirect to="/" />
-            )}
           </Route>
           <Route path="/blog/:slugName">
             <BlogDetail />
           </Route>
+          <Route path="/new">
+            {userContext.state.isAuthenticated ? (
+              <NewBlogPage />
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+
+          <Route path="/edit/:slugName">
+            {userContext.state.isAuthenticated ? (
+              <EditBlogPage />
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
           <Route path="/chat/:roomName">
-            <ChatRoom />
+            {userContext.state.isAuthenticated ? (
+              <ChatRoom />
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
         </Switch>
       </div>
