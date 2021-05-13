@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-
 import { UserContext } from "./context/UserProvider";
-
 import LogInPage from "./pages/LoginPage";
 import NavBar from "./components/NavBar";
 import BlogMain from "./pages/BlogMain";

@@ -11,7 +11,7 @@ const LogOutButton = () => {
     const logOut = async (token) => {
         try {
           const response = await axios.post(
-            logOutPath,
+            `${process.env.REACT_APP_BACKEND_URL}${logOutPath}`,
             {}, // since a post request is made, some "data" is expected as a second argument. if argument is not provided, it will return an error. 
             {
               headers: {
@@ -19,7 +19,7 @@ const LogOutButton = () => {
               },
             }
           );
-          console.log(response.data);
+          
           userContext.dispatch({ type: LOGOUT_SUCCESS });
           history.push("/");
         } catch (err) {
@@ -30,7 +30,7 @@ const LogOutButton = () => {
       const handleLogOut = () => {
         const user = JSON.parse(localStorage.getItem("user"));
           if (user) { // to prevent the absence of "user" object in local storage from crashing the app.
-            console.log(user.token);
+            
             logOut(user.token);
           }
       };

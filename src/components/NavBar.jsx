@@ -8,10 +8,10 @@ import LogOutButton from "./LogOutButton";
 const NavBar = () => {
   const userContext = useContext(UserContext);
   const [categories, setCategories] = useState([]);
-
+  
   const getAllCategories = async () => {
     try {
-      const response = await axios.get(`${allCategoriesPath}`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}${allCategoriesPath}`);
       
       setCategories(response.data);
     } catch (err) {
@@ -63,7 +63,7 @@ const NavBar = () => {
       <hr className="divider" />
       <div className="nav-scroller py-1 mb-2">
         <nav className="nav d-flex justify-content-between">
-          {categories[0] && categories.map((category) => {
+          {categories && categories.map((category) => {
             return (
               <Link
                 key={category.id}
