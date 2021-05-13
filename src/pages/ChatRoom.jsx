@@ -9,9 +9,7 @@ const ChatRoom = () => {
   // useEffect fires only once upon load.
   const [clientState, setClientState] = useState(null);
   const userContext = useContext(UserContext);
-  const [chatState, setChatState] = useState({
-    messages: [],
-  });
+  const [chatState, setChatState] = useState([]);
   const { roomName } = useParams();
 
   const initialValues = {
@@ -50,9 +48,15 @@ const ChatRoom = () => {
       const serverData = JSON.parse(message.data);
       if (serverData) {
         setChatState((prevValues) => {
-          return {
-            messages: [...prevValues.messages, serverData.message],
-          };
+        return [
+            ...prevValues, {
+                name: serverData.name,
+                message: serverData.message,
+            }
+        ]
+            //   return {
+        //     messages: [...prevValues.messages, serverData.message],
+        //   };
         });
       }
     };
@@ -62,10 +66,15 @@ const ChatRoom = () => {
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-sm-8 col-md-6">
-          {chatState.messages.map((message, index) => {
+          <p className="mb-3">Room Name: {roomName}</p>
+        </div>
+        {/* small hack to break to a new line */}
+        <div className="w-100"></div>
+        <div className="col-sm-8 col-md-6 chat-window rounded bg-white py-3">
+          {chatState[0] && chatState.map((message, index) => {
             return (
-              <p key={index}>
-                <span>Name: </span> {message}
+              <p key={index} className="chat-bubble">
+                <span>{message.name}: </span> {message.message}
               </p>
             );
           })}
