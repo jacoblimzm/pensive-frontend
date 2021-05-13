@@ -30,7 +30,7 @@ const LogOutButton = () => {
       const handleLogOut = () => {
         const user = JSON.parse(localStorage.getItem("user"));
           if (user) { // to prevent the absence of "user" object in local storage from crashing the app.
-            console.log(user.token);
+            
             logOut(user.token);
           }
       };
