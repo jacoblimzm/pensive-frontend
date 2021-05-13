@@ -8,10 +8,10 @@ import Header from "../components/Header";
 const BlogMain = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [featuredPost, setFeaturedPost] = useState([]);
-
+  
   const getAllPosts = async () => {
     try {
-      const response = await axios.get(allPostsPath);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}${allPostsPath}`);
       
       setBlogPosts(response.data);
     } catch (err) {
@@ -21,7 +21,7 @@ const BlogMain = () => {
 
   const getFeaturedPost = async () => {
     try {
-      const response = await axios.get(featuredPostPath);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}${featuredPostPath}`);
       
       setFeaturedPost(response.data[0]);
     } catch (err) {
@@ -41,7 +41,7 @@ const BlogMain = () => {
 
         <Header header="Latest" />
         <div className="row mb-2">
-          {blogPosts[0] && blogPosts.map((post) => {
+          {blogPosts && blogPosts.map((post) => {
             return <BlogCard key={post.id} {...post} />;
           })}
         </div>
