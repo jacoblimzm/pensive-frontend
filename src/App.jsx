@@ -9,6 +9,7 @@ import BlogDetail from "./pages/BlogDetail";
 import RegisterPage from "./pages/RegisterPage";
 import NewBlogPage from "./pages/NewBlogPage";
 import EditBlogPage from "./pages/EditBlogPage";
+import ChatRoom from "./pages/ChatRoom";
 require("dotenv").config();
 
 function App() {
@@ -28,25 +29,33 @@ function App() {
           <Route path="/register">
             <RegisterPage />
           </Route>
+          <Route path="/category/:categoryName">
+            <CategoryPage />
+          </Route>
+          <Route path="/blog/:slugName">
+            <BlogDetail />
+          </Route>
           <Route path="/new">
             {userContext.state.isAuthenticated ? (
               <NewBlogPage />
             ) : (
-              <Redirect to="/" />
+              <Redirect to="/login" />
             )}
           </Route>
-          <Route path="/category/:categoryName">
-            <CategoryPage />
-          </Route>
+
           <Route path="/edit/:slugName">
             {userContext.state.isAuthenticated ? (
               <EditBlogPage />
             ) : (
-              <Redirect to="/" />
+              <Redirect to="/login" />
             )}
           </Route>
-          <Route path="/blog/:slugName">
-            <BlogDetail />
+          <Route path="/chat/:roomName">
+            {userContext.state.isAuthenticated ? (
+              <ChatRoom />
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
         </Switch>
       </div>

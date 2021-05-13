@@ -49,6 +49,13 @@ a {
     /* text-indent: 50px; */
 }
 
+.chat-window {
+  background-color: #ffff;
+  height: 300px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 #blog-header {
     font-size: 2.25rem;
     font-style: italic;
