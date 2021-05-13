@@ -38,9 +38,11 @@ const NavBar = () => {
             </Link>
           </div>
           <div className="col-4 d-flex justify-content-end align-items-center">
-            <Link className="btn btn-sm btn-outline-warning" to="/chat/room1">
-              Chat
-            </Link>
+            {userContext.state.isAuthenticated && (
+              <Link className="btn btn-sm btn-outline-warning" to="/chat/room1">
+                Chat
+              </Link>
+            )}
             {userContext.state.isAuthenticated && (
               <Link className="btn btn-sm btn-outline-primary mx-2" to="/new">
                 New Post
