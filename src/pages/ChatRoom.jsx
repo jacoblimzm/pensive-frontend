@@ -17,19 +17,21 @@ const ChatRoom = () => {
   const initialValues = {
     message: "",
   };
-  const { formValues, setFormValues, handleInputChange } = useForm(initialValues);
+  const { formValues, setFormValues, handleInputChange } =
+    useForm(initialValues);
 
   const handleSubmit = (e) => {
-      e.preventDefault();
+    e.preventDefault();
 
-      clientState.send(JSON.stringify({
-          name: "Jacob",
-          message: formValues.message,
-      }))
+    clientState.send(
+      JSON.stringify({
+        name: "Jacob",
+        message: formValues.message,
+      })
+    );
 
-      setFormValues(initialValues);
-  }
-
+    setFormValues(initialValues);
+  };
 
   useEffect(() => {
     const client = new W3CWebSocket(`ws://localhost:8000/ws/chat/${roomName}/`);
@@ -57,24 +59,38 @@ const ChatRoom = () => {
   }, []);
 
   return (
-    <main className="container form-container">
-      {chatState.messages.map((message, index) => {
-        return (
-          <p key={index}>
-            <span>Name: </span> {message}
-          </p>
-        );
-      })}
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-sm-8 col-md-6">
+          {chatState.messages.map((message, index) => {
+            return (
+              <p key={index}>
+                <span>Name: </span> {message}
+              </p>
+            );
+          })}
+        </div>
+      </div>
       <Form handleSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="message"
-          value={formValues.message}
-          onChange={handleInputChange}
-        />
-        <input type="submit" name="submit" value="Send" />
+        <div className="col-sm-8 col-md-4 my-2">
+          <input
+            type="text"
+            name="message"
+            className="form-control"
+            value={formValues.message}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="col-sm-8 col-md-2 my-2">
+          <input
+            type="submit"
+            name="submit"
+            className="form-control"
+            value="Send"
+          />
+        </div>
       </Form>
-    </main>
+    </div>
   );
 };
 
