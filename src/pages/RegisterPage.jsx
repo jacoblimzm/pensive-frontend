@@ -66,7 +66,7 @@ const RegisterPage = () => {
           />
         </div>
         {/* small hack to break to a new line */}
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="register-username" className="form-label">
             Username
@@ -83,7 +83,7 @@ const RegisterPage = () => {
           />
         </div>
         {/* small hack to break to a new line */}
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="register-password" className="form-label">
             Password
@@ -100,7 +100,7 @@ const RegisterPage = () => {
           />
         </div>
         {/* small hack to break to a new line */}
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <div className="form-check mb-3">
             <input
@@ -115,7 +115,7 @@ const RegisterPage = () => {
             </label>
           </div>
         </div>
-        <div class="w-100"></div>
+        <div className="w-100"></div>
         <div
           style={{ textAlign: "center" }}
           className="col-9 col-sm-9 col-md-6 mb-3"

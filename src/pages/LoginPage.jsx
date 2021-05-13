@@ -62,7 +62,7 @@ const LogInPage = () => {
           />
         </div>
         {/* small hack to break to a new line */}
-        <div class="w-100"></div> 
+        <div className="w-100"></div> 
         <div className="col-9 col-sm-9 col-md-6 mb-3">
           <label htmlFor="login-password" className="form-label">
             Password
