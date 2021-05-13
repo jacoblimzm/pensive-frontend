@@ -9,10 +9,10 @@ import { capitalise } from "../constants/functions";
 const CategoryPage = () => {
   const { categoryName } = useParams();
   const [categoryPosts, setCategoryPosts] = useState([]);
-
+  
   const getIndividualCategory = async () => {
     try {
-      const response = await axios.get(`${allCategoriesPath}${categoryName}`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}${allCategoriesPath}${categoryName}`);
       
       setCategoryPosts(response.data.blogentries);
     } catch (err) {

@@ -17,7 +17,7 @@ const RegisterPage = () => {
 
   const register = async (username, password, email, is_staff) => {
     try {
-      const response = await axios.post(registerPath, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}${registerPath}`, {
         username: username,
         password: password,
         email: email,

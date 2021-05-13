@@ -24,10 +24,10 @@ const EditBlogPage = () => {
     content: "",
     breaking: false,
   };
-  
+ 
   const getBlogPost = async (slug) => {
     try {
-      const response = await axios.get(`${allPostsPath}${slug}/`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}${allPostsPath}${slug}/`);
       console.log(response.data);      
       setFormValues({ // with the setFormValues from useForm, pre fill the input fields with existing blog information
           ...response.data,
@@ -39,7 +39,7 @@ const EditBlogPage = () => {
   };
   const getAllCategory = async () => {
     try {
-      const response = await axios.get(`${allCategoriesPath}`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}${allCategoriesPath}`);
       console.log(response.data);
       setCategories(response.data);
     } catch (err) {
@@ -51,7 +51,7 @@ const EditBlogPage = () => {
   const updatePost = async (id, title, excerpt, category, image, month, day, content, breaking=false) => {
 
     try {
-        const response = await axios.put(`${editPostPath}${slugName}`, {
+        const response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}${editPostPath}${slugName}`, {
             id: id,
             title: title,
             excerpt: excerpt,

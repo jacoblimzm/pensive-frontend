@@ -11,7 +11,7 @@ const LogOutButton = () => {
     const logOut = async (token) => {
         try {
           const response = await axios.post(
-            logOutPath,
+            `${process.env.REACT_APP_BACKEND_URL}${logOutPath}`,
             {}, // since a post request is made, some "data" is expected as a second argument. if argument is not provided, it will return an error. 
             {
               headers: {

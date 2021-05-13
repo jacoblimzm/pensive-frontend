@@ -22,10 +22,10 @@ const NewBlogPage = () => {
     content: "",
     breaking: false, // boolean. drop down?
   };
-
+  
   const getAllCategory = async () => {
     try {
-      const response = await axios.get(`${allCategoriesPath}`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}${allCategoriesPath}`);
       console.log(response.data);
       setCategories(response.data);
     } catch (err) {
@@ -37,7 +37,7 @@ const NewBlogPage = () => {
   const createNewPost = async (title, excerpt, category, image, month, day, content, breaking=false) => {
 
     try {
-        const response = await axios.post(newPostPath, {
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}${newPostPath}`, {
             title: title,
             excerpt: excerpt,
             category: category,

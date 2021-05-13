@@ -10,10 +10,10 @@ const BlogDetail = () => {
   const { slugName } = useParams();
 
   const [blogPost, setBlogPost] = useState({});
-
+  
   const getBlogPost = async (slug) => {
     try {
-      const response = await axios.get(`${allPostsPath}${slug}/`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}${allPostsPath}${slug}/`);
       
       setBlogPost(response.data);
     } catch (err) {
