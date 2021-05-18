@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# pensive (front-end)
+---
+## Details
+Pensive is a news-style blogging app where users can create and edit posts that look like professional articles for readers to consume. Posts are sorted according to category with one featured post. A real time chatroom is available for online users to engage in discussion about posts. Pensive is built using React for the front-end and django(python) for the back-end.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository hosts the front-end.
+[Link to back-end](https://github.com/jacoblimzm/pensive-backend)
 
-## Available Scripts
+*Project Document at the bottom*
 
-In the project directory, you can run:
 
-### `npm start`
+## General Approach
+1. Project document set up to determine:
+   - User Stories
+   - Wireframes
+   - Models
+   - General structure and naming conventions
+2.  Back-end work started first to ensure that proper CRUD functionality is set up and working. Backend tested with [Postman](https://www.postman.com/). 
+3.  Front-end work begun with function back-end. Pages serving HTTP requests built first.
+4.  Real time chat functionality based on websockets built last.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies Used
+- **P:** PostgreSQL is an open-source relational database, and is one of the most popular alternatives to mySQL. Unlike MongoDB which stores data in JSON objects, data in a SQL database is stored in tables, and each data entry is a row in the table. SQL databases are great for establishing relationships between data, however, requires a schema and therefore is less flexible compared to noSQL databases.
+- **D:** Django is a python framework that simplifies the process of building a backend. Django comes with 'batteries-included', meaning it is opinionated and comes with built in tools for common functionality(i.e admin, ORM, database connection). This helps to speed up development by making well-tested functions available and letting the developer focus on other app-specific functionality.
+- **R:** React.js is a popular JavaScript based frontend framework that helps to simplify the building of websites by breaking down the logic and functionality into smaller components. This makes projects more reusable, modular, and dynamic. 
+- **Redis:** Redis is an in-memory data storage that is typically used as a database and cache. It's speed is suiltable for real-time applications like chat.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
+1. Fork the project into your personal GitHub repo
+2. Install all packages:
+```
+$ npm install
+```
 
-### `npm test`
+## Getting Started
+There are currently two environment variables which point to the back-end hosted on heroku, so feel free to define your own .env file with your local server as the path.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Run the project
+```
+$ npm start
+```
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Dependencies
+React:
+- axios
+- dotenv
+- react-router
+- react-router-dom
+- websocket
+---
+[Project Document](https://docs.google.com/document/d/1uHbCfDDgo5v9DKCopHPoxmvlLbPzsDYwioVBvozA1cM/edit)
